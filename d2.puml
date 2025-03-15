@@ -1,0 +1,26 @@
+class Form1 {
+    
+ListBox todoListBox
+ListBox inProgressListBox
+ListBox doneListBox
+Button addButton
+Button editButton
+Button deleteButton
+Button moveToInProgressButton
+Button moveToDoneButton
+TextBox taskTextBox
+MenuStrip menuStrip
+ToolStripMenuItem saveMenuItem
+ToolStripMenuItem loadMenuItem
++ SetupUI()+ AddTask()+ EditTask()+ DeleteTask()+ MoveToInProgress()+ MoveToDone()+ SaveTasks()+ LoadTasks()+ GetTasks()+ LoadTasksFromFile()
+}
+
+class Task {
+    
+string text
+string status+ Task(text, status)+ EditTask(newText)+ ChangeStatus(newStatus)
+}
+
+Form1 --> Task : "створює"
+Form1 --> ListBox : "зберігає задачі"
+Form1 --> Button : "керує діями"

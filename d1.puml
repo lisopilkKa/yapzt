@@ -1,0 +1,19 @@
+
+actor Користувач
+rectangle "Task Manager" {
+    (Додати задачу) as (AddTask)
+    (Редагувати задачу) as (EditTask)
+    (Видалити задачу) as (DeleteTask)
+    (Змінити статус задачі) as (ChangeStatus)
+    (Зберегти задачі у файл) as (SaveTasks)
+    (Завантажити задачі з файлу) as (LoadTasks)
+}
+
+Користувач --> (AddTask)
+Користувач --> (EditTask)
+Користувач --> (DeleteTask)
+Користувач --> (ChangeStatus)
+Користувач --> (SaveTasks)
+Користувач --> (LoadTasks)
+
+    

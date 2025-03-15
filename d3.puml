@@ -1,0 +1,18 @@
+actor Користувач
+participant Form1
+participant Task
+
+Користувач -> Form1: Додає нову задачу
+Form1 -> Task: Створює нову задачу
+Task --> Form1: Повертає нову задачу
+Form1 -> Form1: Оновлює UI
+
+Користувач -> Form1: Редагує задачу
+Form1 -> Task: Оновлює текст задачі
+Task --> Form1: Підтверджує зміну
+Form1 -> Form1: Оновлює UI
+
+Користувач -> Form1: Видаляє задачу
+Form1 -> Task: Видаляє задачу
+Task --> Form1: Завершено
+Form1 -> Form1: Оновлює UI
