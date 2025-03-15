@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build_and_test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x  # Вкажи версію .NET, яку використовуєш
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run unit tests
+        run: dotnet test --no-restore --verbosity normal
+
+  static_analysis:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install static analysis tools
+        run: dotnet tool install --global dotnet-format
+
+      - name: Run static code analysis
+        run: dotnet format --verify-no-changes
+
+  merge_check:
+    needs: [build_and_test, static_analysis]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure all checks passed before merging
+        run: echo "All checks passed!"
