@@ -1,0 +1,6 @@
+projectKey=TaskManager
+serverUrl=http://localhost:9000
+serverVersion=25.3.0.104237
+dashboardUrl=http://localhost:9000/dashboard?id=TaskManager
+ceTaskId=802247d4-8b43-435c-a71d-2ceba38dfe9c
+ceTaskUrl=http://localhost:9000/api/ce/task?id=802247d4-8b43-435c-a71d-2ceba38dfe9c
