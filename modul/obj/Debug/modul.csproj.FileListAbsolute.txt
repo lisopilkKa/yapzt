@@ -1,0 +1,10 @@
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.Form1.resources
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.Properties.Resources.resources
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.csproj.GenerateResource.cache
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\bin\Debug\modul.exe.config
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\bin\Debug\modul.exe
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\bin\Debug\modul.pdb
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.exe
+C:\Users\Asus\Desktop\унік\якість програмного забезпечення\modul\modul\modul\obj\Debug\modul.pdb
