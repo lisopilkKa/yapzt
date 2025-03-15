@@ -1,6 +1,7 @@
 ﻿using System;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,53 +25,117 @@ namespace modul
 
         private void SetupUI()
         {
-            this.Text = "Task Manager";
-            this.Size = new System.Drawing.Size(700, 400);
+           
+                this.Text = "Task Manager";
+                this.Size = new System.Drawing.Size(700, 400);
 
-            menuStrip = new MenuStrip();
-            saveMenuItem = new ToolStripMenuItem("Save");
-            loadMenuItem = new ToolStripMenuItem("Load");
-            saveMenuItem.Click += SaveTasks;
-            loadMenuItem.Click += LoadTasks;
-            menuStrip.Items.Add(saveMenuItem);
-            menuStrip.Items.Add(loadMenuItem);
-            this.MainMenuStrip = menuStrip;
-            this.Controls.Add(menuStrip);
+                menuStrip = new MenuStrip();
+                saveMenuItem = new ToolStripMenuItem("Save");
+                loadMenuItem = new ToolStripMenuItem("Load");
+                saveMenuItem.Click += SaveTasks;
+                loadMenuItem.Click += LoadTasks;
+                menuStrip.Items.Add(saveMenuItem);
+                menuStrip.Items.Add(loadMenuItem);
+                this.MainMenuStrip = menuStrip;
+                this.Controls.Add(menuStrip);
 
-            Label todoLabel = new Label { Text = "To Do", Left = 20, Top = 35 };
-            todoListBox = new ListBox { Left = 20, Top = 60, Width = 150, Height = 200 };
+                // Зміна шрифтів для міток
+                Font labelFont = new Font("Arial", 12, FontStyle.Bold);
 
-            Label inProgressLabel = new Label { Text = "In Progress", Left = 250, Top = 35 };
-            inProgressListBox = new ListBox { Left = 250, Top = 60, Width = 150, Height = 200 };
+                Label todoLabel = new Label
+                {
+                    Text = "To Do",
+                    Left = 20,
+                    Top = 35,
+                    Font = labelFont  // Новий шрифт для мітки
+                };
+                todoListBox = new ListBox { Left = 20, Top = 60, Width = 150, Height = 200 };
 
-            Label doneLabel = new Label { Text = "Done", Left = 480, Top = 35 };
-            doneListBox = new ListBox { Left = 480, Top = 60, Width = 150, Height = 200 };
+                Label inProgressLabel = new Label
+                {
+                    Text = "In Progress",
+                    Left = 250,
+                    Top = 35,
+                    Font = labelFont  // Новий шрифт для мітки
+                };
+                inProgressListBox = new ListBox { Left = 250, Top = 60, Width = 150, Height = 200 };
 
-            taskTextBox = new TextBox { Left = 20, Top = 280, Width = 150 };
-            addButton = new Button { Text = "Add", Left = 180, Top = 280 };
-            editButton = new Button { Text = "Edit", Left = 260, Top = 280 };
-            deleteButton = new Button { Text = "Delete", Left = 340, Top = 280 };
-            moveToInProgressButton = new Button { Text = "→", Left = 170, Top = 100 };
-            moveToDoneButton = new Button { Text = "→", Left = 400, Top = 100 };
+                Label doneLabel = new Label
+                {
+                    Text = "Done",
+                    Left = 480,
+                    Top = 35,
+                    Font = labelFont  // Новий шрифт для мітки
+                };
+                doneListBox = new ListBox { Left = 480, Top = 60, Width = 150, Height = 200 };
 
-            addButton.Click += AddTask;
-            editButton.Click += EditTask;
-            deleteButton.Click += DeleteTask;
-            moveToInProgressButton.Click += MoveToInProgress;
-            moveToDoneButton.Click += MoveToDone;
+                taskTextBox = new TextBox { Left = 20, Top = 280, Width = 150 };
 
-            this.Controls.Add(todoLabel);
-            this.Controls.Add(todoListBox);
-            this.Controls.Add(inProgressLabel);
-            this.Controls.Add(inProgressListBox);
-            this.Controls.Add(doneLabel);
-            this.Controls.Add(doneListBox);
-            this.Controls.Add(taskTextBox);
-            this.Controls.Add(addButton);
-            this.Controls.Add(editButton);
-            this.Controls.Add(deleteButton);
-            this.Controls.Add(moveToInProgressButton);
-            this.Controls.Add(moveToDoneButton);
+                // Колір кнопок та шрифт
+                addButton = new Button
+                {
+                    Text = "Add",
+                    Left = 180,
+                    Top = 280,
+                    BackColor = System.Drawing.Color.Gray,  // Сірий колір для кнопки
+                    ForeColor = System.Drawing.Color.White  // Білий текст кнопки
+                };
+
+                editButton = new Button
+                {
+                    Text = "Edit",
+                    Left = 260,
+                    Top = 280,
+                    BackColor = System.Drawing.Color.DarkGray,  // Трохи темніший сірий
+                    ForeColor = System.Drawing.Color.White
+                };
+
+                deleteButton = new Button
+                {
+                    Text = "Delete",
+                    Left = 340,
+                    Top = 280,
+                    BackColor = System.Drawing.Color.LightGray,  // Світліший сірий
+                    ForeColor = System.Drawing.Color.White
+                };
+
+                moveToInProgressButton = new Button
+                {
+                    Text = "→",
+                    Left = 170,
+                    Top = 100,
+                    BackColor = System.Drawing.Color.Gray,
+                    ForeColor = System.Drawing.Color.White
+                };
+
+                moveToDoneButton = new Button
+                {
+                    Text = "→",
+                    Left = 400,
+                    Top = 100,
+                    BackColor = System.Drawing.Color.Gray,
+                    ForeColor = System.Drawing.Color.White
+                };
+
+                addButton.Click += AddTask;
+                editButton.Click += EditTask;
+                deleteButton.Click += DeleteTask;
+                moveToInProgressButton.Click += MoveToInProgress;
+                moveToDoneButton.Click += MoveToDone;
+
+                this.Controls.Add(todoLabel);
+                this.Controls.Add(todoListBox);
+                this.Controls.Add(inProgressLabel);
+                this.Controls.Add(inProgressListBox);
+                this.Controls.Add(doneLabel);
+                this.Controls.Add(doneListBox);
+                this.Controls.Add(taskTextBox);
+                this.Controls.Add(addButton);
+                this.Controls.Add(editButton);
+                this.Controls.Add(deleteButton);
+                this.Controls.Add(moveToInProgressButton);
+                this.Controls.Add(moveToDoneButton);
+            
         }
 
         private void AddTask(object sender, EventArgs e)
