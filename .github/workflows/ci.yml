@@ -24,8 +24,14 @@ jobs:
       - name: Clear NuGet Cache
         run: dotnet nuget locals all --clear
 
-      - name: List available build configurations
-        run: dotnet msbuild modul.sln /t:help | findstr Configuration
+      - name: Check .NET info
+        run: dotnet --info
+
+      - name: Check available build configurations
+        run: dotnet msbuild modul.sln /t:help > output.txt
+
+      - name: Display build configurations
+        run: type output.txt
 
       - name: Restore dependencies
         run: dotnet restore
