@@ -8,6 +8,8 @@ on:
     branches:
       - master
 
+
+
 jobs:
   build_and_test:
     runs-on: windows-latest
@@ -19,26 +21,21 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x  # або інша стабільна версія
+          dotnet-version: 9.0.x
 
-      - name: Set Environment Variables
-        run: |
-          echo "PROCESSOR_ARCHITECTURE=AMD64" >> $GITHUB_ENV
-          echo "MSBUILDDISABLENODEREUSE=1" >> $GITHUB_ENV
-          echo "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1" >> $GITHUB_ENV
-
-      - name: Clear .NET Cache
+      - name: Clear NuGet Cache
         run: dotnet nuget locals all --clear
 
       - name: Restore dependencies
-        run: dotnet restore modul.sln
+        run: dotnet restore
 
       - name: Build project with MSBuild
-       run: |
-          & "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64\MSBuild.exe" modul.sln /p:Configuration=Release /p:Platform="Any CPU" /m
+        shell: cmd
+        run: |
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64\MSBuild.exe" modul.sln /p:Configuration=Release /p:Platform="Any CPU" /m
+
       - name: Run unit tests
         run: dotnet test --no-restore --verbosity normal
-
   static_analysis:
     runs-on: windows-latest
     steps:
