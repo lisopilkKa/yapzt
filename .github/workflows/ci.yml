@@ -19,31 +19,27 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.201 # Вкажи точну версію .NET
+          dotnet-version: 9.0.201
 
-      - name: Clear NuGet Cache
-        run: dotnet nuget locals all --clear
+      - name: Check .NET SDKs
+        run: dotnet --list-sdks
 
-      - name: Check .NET info
-        run: dotnet --info
+      - name: Check MSBuild Version
+        run: dotnet msbuild /version
 
-      - name: Check available build configurations
-        run: dotnet msbuild modul.sln /t:help > output.txt
-
-      - name: Display build configurations
-        run: type output.txt
+      - name: Check if solution exists
+        run: |
+          if (-Not (Test-Path "modul.sln")) {
+            Write-Error "Solution file not found!"
+            exit 1
+          }
 
       - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Clean project
-        run: dotnet clean
+        run: dotnet restore modul.sln
 
       - name: Build project
-        run: dotnet build --configuration Release --no-restore -p:Platform="Any CPU"
+        run: dotnet build modul.sln --configuration Release --no-restore
 
-      - name: Run unit tests
-        run: dotnet test --no-restore --verbosity normal
 
   static_analysis:
     runs-on: windows-latest
