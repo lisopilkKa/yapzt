@@ -48,7 +48,7 @@ jobs:
         run: dotnet tool install --global dotnet-format
 
       - name: Run static code analysis
-        run: dotnet format --verify-no-changes || echo "Code format issues found, but continuing."
+        run: dotnet format --verify-no-changes || echo "Formatting issues found, but not failing pipeline."
 
   merge_check:
     needs: [build_and_test, static_analysis]
