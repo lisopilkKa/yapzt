@@ -19,16 +19,22 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.x  # Переконайся, що це правильна версія для твого проєкту
+          dotnet-version: 9.0.201 # Вкажи точну версію .NET
 
       - name: Clear NuGet Cache
         run: dotnet nuget locals all --clear
 
+      - name: List available build configurations
+        run: dotnet msbuild modul.sln /t:help | findstr Configuration
+
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Clean project
+        run: dotnet clean
+
       - name: Build project
-        run: dotnet build --configuration Release --no-restore 
+        run: dotnet build --configuration Release --no-restore -p:Platform="Any CPU"
 
       - name: Run unit tests
         run: dotnet test --no-restore --verbosity normal
@@ -42,7 +48,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.x
+          dotnet-version: 9.0.201
 
       - name: Install static analysis tools
         run: dotnet tool install --global dotnet-format
