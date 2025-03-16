@@ -19,28 +19,22 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.201
+          dotnet-version: 8.0.x  # або будь-яка стабільна версія ю
 
-      - name: Check .NET SDKs
-        run: dotnet --list-sdks
-
-      - name: Check MSBuild Version
-        run: dotnet msbuild /version
-
-      - name: Check if solution exists
+      - name: Set Environment Variables
         run: |
-          if (-Not (Test-Path "modul.sln")) {
-            Write-Error "Solution file not found!"
-            exit 1
-          }
+          echo "PROCESSOR_ARCHITECTURE=AMD64" >> $GITHUB_ENV
+          echo "MSBUILDDISABLENODEREUSE=1" >> $GITHUB_ENV
 
       - name: Restore dependencies
         run: dotnet restore modul.sln
 
       - name: Build project
-        run: dotnet build modul.sln --configuration Release --no-restore
+        run: dotnet build modul.sln --configuration Release --no-restore -p:Platform="Any CPU"
 
-
+      - name: Run unit tests
+        run: dotnet test --no-restore --verbosity normal
+        
   static_analysis:
     runs-on: windows-latest
     steps:
